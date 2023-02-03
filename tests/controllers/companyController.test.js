@@ -60,8 +60,10 @@ describe('update company name', () => {
   it('should return updated company object when name is passed', async () => {
     const mockReq = {
       query: {},
-      body: {
+      params: {
         'id': '95b5a067-808a-44a9-a490-b4ef8a045f61',
+      },
+      body: {
         'name': 'Volkswagen',
       }
     };
@@ -74,14 +76,16 @@ describe('update company name', () => {
     jest.spyOn(companyServices, 'updateCompanyData').mockResolvedValue(company);
 
     await companyController.getUpdateCompanyController(mockReq, mockRes, next);
-    expect(mockRes.status).toBeCalledWith(201);
+    expect(mockRes.status).toBeCalledWith(200);
     expect(mockRes.json).toBeCalledWith(company);
   });
   it('should return error if something goes wrong on service promise', async () => {
     const mockReq = {
       query: {},
-      body: {
+      params: {
         'id': '95b5a067-808a-44a9-a490-b4ef8a045f61',
+      },
+      body: {
         'name': 'Volkswagen',
       }
     };
@@ -107,9 +111,9 @@ describe('get company by id', () => {
 
   it('should return company object when company id is passed', async () => {
     const mockReq = {
-      query: {
-        id: '95b5a067-808a-44a9-a490-b4ef8a045f61'
-      },
+      params: {
+        'id': '95b5a067-808a-44a9-a490-b4ef8a045f61',
+      }
     };
     const mockRes = {
       status: jest.fn().mockReturnThis(),
@@ -125,9 +129,9 @@ describe('get company by id', () => {
   });
   it('should return error if something goes wrong on service promise', async () => {
     const mockReq = {
-      query: {
-        id: '95b5a067-808a-44a9-a490-b4ef8a045f61'
-      },
+      params: {
+        'id': '95b5a067-808a-44a9-a490-b4ef8a045f61',
+      }
     };
     const mockRes = {
       status: jest.fn().mockReturnThis(),
