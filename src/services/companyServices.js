@@ -52,9 +52,16 @@ const updateCompanyData = async (companyId, ceo = null, companyName = null) => {
   return { id, name, ceo, sector_name };
 };
 
+const getCompanyById = async (companyId) => {
+  const companyObj = await db.Company.findByPk(companyId);
+  return companyObj;
+};
+
+
 
 module.exports = {
   getAllScore,
   getCompaniesBySector,
-  updateCompanyData
+  updateCompanyData,
+  getCompanyById
 };

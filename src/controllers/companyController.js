@@ -1,4 +1,4 @@
-const { getCompaniesBySector, getAllScore, updateCompanyData } = require('../services/companyServices');
+const { getCompaniesBySector, getCompanyById, getAllScore, updateCompanyData } = require('../services/companyServices');
 
 const getAllScoreController = async (req, res, next) => {
   try {
@@ -31,8 +31,20 @@ const getUpdateCompanyController = async (req, res, next) => {
   }
 };
 
+const getCompanyByIdController = async (req, res, next) => {
+  try {
+    const { id } = req.query;
+    console.log(req.body);
+    const result = await getCompanyById(id.toString());
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getCompaniesController,
   getAllScoreController,
-  getUpdateCompanyController
+  getUpdateCompanyController,
+  getCompanyByIdController
 };
