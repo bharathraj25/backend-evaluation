@@ -1,37 +1,35 @@
 const { describe, it } = require('@jest/globals');
 const { Company } = require('../../db/models');
 
-const companyController = require('../../src/controllers/companyController');
 const companyServices = require('../../src/services/companyServices');
 
 describe('get all scores', () => {
-  const scores = [
+
+  const score = [
     {
       'id': '95b5a067-808a-44a9-a490-b4ef8a045f61',
       'name': 'Volkswagen',
       'score': 15.784075000000001
-    },
+    }
+  ];
+  const companies = [
     {
-      'id': '728ae3b7-89dd-41eb-9608-4fc20c839d4c',
-      'name': 'Mercedes',
-      'score': 18.481825
+      'id': '95b5a067-808a-44a9-a490-b4ef8a045f61',
+      'name': 'Volkswagen',
+      'cpi': 0.46,
+      'cf': 523763,
+      'mau': 0.05,
+      'roic': 5.66,
     }
   ];
 
   it('should return list of all companies with scores', async () => {
-    const mockReq = {
-      query: {},
-    };
-    const mockRes = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn()
-    };
-    const next = () => { };
+    const spiedFindAll = jest.spyOn(Company, 'findAll')
+      .mockResolvedValue(companies);
 
-    jest.spyOn(companyServices, 'getAllScore').mockResolvedValue(scores);
-
-    await companyController.getAllScoreController(mockReq, mockRes, next);
-    expect(mockRes.status).toBeCalledWith(200);
-    expect(mockRes.json).toBeCalledWith(scores);
+    const returedVal = await companyServices.getAllScore();
+    expect(spiedFindAll).toBeCalled();
+    expect(returedVal)
+      .toEqual(score);
   });
 });
