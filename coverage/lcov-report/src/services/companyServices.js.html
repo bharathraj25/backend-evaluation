@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">38.88% </span>
+                <span class="strong">69.44% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/36</span>
+                <span class='fraction'>25/36</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">12.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>1/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/8</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.75% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/32</span>
+                <span class='fraction'>24/32</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -154,29 +154,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -222,18 +222,18 @@ const getAllScore = async () =&gt; {
   return result;
 };
 &nbsp;
-const getCompaniesBySector = <span class="fstat-no" title="function not covered" >as</span>ync (sectorName) =&gt; {
-  const data = <span class="cstat-no" title="statement not covered" >await db.Company.findAll({</span>
+const getCompaniesBySector = async (sectorName) =&gt; {
+  const data = await db.Company.findAll({
     where: {
       sector_name: sectorName
     }
   });
-  const result = <span class="cstat-no" title="statement not covered" >[];</span>
+  const result = [];
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  data.forEach(<span class="fstat-no" title="function not covered" >co</span>mpany =&gt; {</span>
-    let { cpi, cf, mau, roic, name, id, ceo } = <span class="cstat-no" title="statement not covered" >company;</span>
-    let score = <span class="cstat-no" title="statement not covered" >((Number(cpi) * 10) + (Number(cf) / 10000) + (Number(mau) * 10) + Number(roic)) / 4;</span>
-<span class="cstat-no" title="statement not covered" >    result.push({</span>
+  data.forEach(company =&gt; {
+    let { cpi, cf, mau, roic, name, id, ceo } = company;
+    let score = ((Number(cpi) * 10) + (Number(cf) / 10000) + (Number(mau) * 10) + Number(roic)) / 4;
+    result.push({
       id,
       name,
       ceo,
@@ -241,11 +241,11 @@ const getCompaniesBySector = <span class="fstat-no" title="function not covered"
     });
   });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (result.length == 0) <span class="cstat-no" title="statement not covered" >throw NotFoundError('No Records Found!');</span></span>
-<span class="cstat-no" title="statement not covered" >  result.sort(<span class="fstat-no" title="function not covered" >(a</span>, b) =&gt; <span class="cstat-no" title="statement not covered" >b.score - a.score)</span>;</span>
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (result.length == 0) <span class="cstat-no" title="statement not covered" >throw NotFoundError('No Records Found!');</span>
+  result.sort((a, b) =&gt; b.score - a.score);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return result.map(<span class="fstat-no" title="function not covered" >(c</span>ompany, index) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    return { ...company, ranking: index + 1 };</span>
+  return result.map((company, index) =&gt; {
+    return { ...company, ranking: index + 1 };
   });
 };
 &nbsp;
@@ -277,7 +277,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-02-03T10:07:33.882Z
+                at 2023-02-03T10:24:21.517Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
