@@ -80,11 +80,11 @@
 		{
 			"name": "localhost:3030/api/company",
 			"request": {
-				"method": "POST",
+				"method": "PATCH",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \"id\": \"b6472c52-732a-4fd2-a463-ae604c0a2c79\", \"ceo\":\"Bharath\" }",
+					"raw": "{ \"ceo\":\"Bharath\" }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -92,14 +92,15 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3030/api/company",
+					"raw": "localhost:3030/api/company/1",
 					"host": [
 						"localhost"
 					],
 					"port": "3030",
 					"path": [
 						"api",
-						"company"
+						"company",
+						"1"
 					]
 				}
 			},
