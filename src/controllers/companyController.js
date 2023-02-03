@@ -22,7 +22,8 @@ const getCompaniesController = async (req, res, next) => {
 
 const getUpdateCompanyController = async (req, res, next) => {
   try {
-    const { id, name, ceo } = req.body;
+    const { id } = req.params;
+    const { name, ceo } = req.body;
     const result = await companyServices.updateCompanyData(id.toString(), ceo, name);
     res.status(200).json(result);
   } catch (err) {
@@ -32,7 +33,7 @@ const getUpdateCompanyController = async (req, res, next) => {
 
 const getCompanyByIdController = async (req, res, next) => {
   try {
-    const { id } = req.query;
+    const { id } = req.params;
     const result = await companyServices.getCompanyById(id.toString());
     res.status(200).json(result);
   } catch (err) {

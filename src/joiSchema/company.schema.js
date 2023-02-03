@@ -25,18 +25,20 @@ const companySchema = {
 };
 
 const paramSchema = joi.object({
-  id: companySchema.id.required(),
+  id: companySchema.id
+});
+
+const updateSchema = joi.object({
   name: companySchema.name,
   ceo: companySchema.ceo
-});
+}).min(1);
+
 
 module.exports = {
   saveDatabse: urlSchema,
-  updateCompany: paramSchema,
+  updateCompany: updateSchema,
   getCompaniesBySector: joi.object({
     sector: companySchema.sector.required()
   }),
-  getCompanyById: joi.object({
-    id: companySchema.id.required()
-  }),
+  getCompanyById: paramSchema
 };

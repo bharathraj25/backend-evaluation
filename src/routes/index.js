@@ -15,12 +15,13 @@ router.get(
   '/api/companies',
   validationMiddleware(companySchema.getCompaniesBySector, 'query'),
   getCompaniesController);
-router.patch('/api/company',
+router.patch('/api/company/:id',
+  validationMiddleware(companySchema.getCompanyById, 'params'),
   validationMiddleware(companySchema.updateCompany),
   getUpdateCompanyController
 );
-router.get('/api/company',
-  validationMiddleware(companySchema.getCompanyById, 'query'),
+router.get('/api/company/:id',
+  validationMiddleware(companySchema.getCompanyById, 'params'),
   getCompanyByIdController
 );
 // router.get('/api/sector', getCompaniesController);
