@@ -8,18 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.STRING
       },
-      cpi: {
-        type: Sequelize.INTEGER
-      },
-      cf: {
-        type: Sequelize.INTEGER
-      },
-      mau: {
-        type: Sequelize.INTEGER
-      },
-      roic: {
-        type: Sequelize.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

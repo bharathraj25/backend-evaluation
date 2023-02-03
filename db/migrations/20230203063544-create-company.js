@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       ceo: {
         type: Sequelize.STRING
@@ -20,9 +20,21 @@ module.exports = {
       sector_name: {
         type: Sequelize.STRING,
         references: {
-          model: "Sectors",
-          key: "name"
+          model: 'Sectors',
+          key: 'name'
         }
+      },
+      cpi: {
+        type: Sequelize.STRING
+      },
+      cf: {
+        type: Sequelize.STRING
+      },
+      mau: {
+        type: Sequelize.STRING
+      },
+      roic: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

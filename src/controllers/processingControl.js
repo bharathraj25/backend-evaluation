@@ -1,14 +1,16 @@
 const readCsvData = require('../utils/readCsvData');
+const { saveToDatabase } = require('../services/saveDatabase');
 
-async function processCsvData(req, res, next) {
+const processCsvData = async (req, res, next) => {
   try {
-    let { url } = req.body;
-    const data = await readCsvData(url);
-    res.status(201).json(data);
+    let { urlLink } = req.body;
+    const data = await readCsvData(urlLink);
+    let result = await saveToDatabase(data);
+    res.status(201).json(result);
   } catch (err) {
     next(err);
   }
-}
+};
 
 module.exports = {
   processCsvData

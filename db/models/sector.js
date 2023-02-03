@@ -12,17 +12,16 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.hasMany(models.Company, {
-        as: "companies",
-        foreignKey: "sector_name"
-      })
+        as: 'companies',
+        foreignKey: 'sector_name'
+      });
     }
   }
   Sector.init({
-    name: DataTypes.STRING,
-    cpi: DataTypes.INTEGER,
-    cf: DataTypes.INTEGER,
-    mau: DataTypes.INTEGER,
-    roic: DataTypes.INTEGER
+    name: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    }
   }, {
     sequelize,
     modelName: 'Sector',
