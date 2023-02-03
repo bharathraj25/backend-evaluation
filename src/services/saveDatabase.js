@@ -56,8 +56,6 @@ const fetchExtrenalApiData = async (csvData) => {
     });
   });
 
-  console.log(companiesData);
-
   return { companyInSector, sectors };
 };
 
@@ -75,7 +73,6 @@ const saveToDatabase = async (csvData) => {
 
   const { companyInSector, sectors } = await fetchExtrenalApiData(csvData);
   sectors.forEach(sector => {
-    console.log(sector);
     insertSectorPromise.push(
       db.Sector.create({
         name: sector

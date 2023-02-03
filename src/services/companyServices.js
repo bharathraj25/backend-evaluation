@@ -1,9 +1,9 @@
-const db = require('../../db/models');
+const { Company } = require('../../db/models');
 
-const { NotFoundError } = require('../error');
+const { NotFoundError, RequiredKeyError } = require('../error');
 
 const getAllScore = async () => {
-  const data = await db.Company.findAll();
+  const data = await Company.findAll();
   const result = [];
 
   data.forEach(company => {
@@ -20,7 +20,7 @@ const getAllScore = async () => {
 };
 
 const getCompaniesBySector = async (sectorName) => {
-  const data = await db.Company.findAll({
+  const data = await Company.findAll({
     where: {
       sector_name: sectorName
     }
@@ -38,7 +38,7 @@ const getCompaniesBySector = async (sectorName) => {
     });
   });
 
-  if (result.length == 0) throw NotFoundError('No Records Found!');
+  if (result.length === 0) throw new NotFoundError('No Records Found!');
   result.sort((a, b) => b.score - a.score);
 
   return result.map((company, index) => {
@@ -47,7 +47,8 @@ const getCompaniesBySector = async (sectorName) => {
 };
 
 const updateCompanyData = async (companyId, ceo = null, companyName = null) => {
-  const companyObj = await db.Company.findByPk(companyId);
+  if (!ceo && !companyName) throw new RequiredKeyError('Required either ceo or company name');
+  const companyObj = await Company.findByPk(companyId);
   if (ceo) companyObj['ceo'] = ceo;
   if (companyName) companyObj['name'] = companyName;
   companyObj.save();
@@ -56,7 +57,8 @@ const updateCompanyData = async (companyId, ceo = null, companyName = null) => {
 };
 
 const getCompanyById = async (companyId) => {
-  const companyObj = await db.Company.findByPk(companyId);
+  const companyObj = await Company.findByPk(companyId);
+  if (!companyObj) throw new NotFoundError('No Record Found!');
   return companyObj;
 };
 

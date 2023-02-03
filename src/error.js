@@ -1,10 +1,3 @@
-class InvalidInputError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = 'InvalidInputError';
-  }
-}
-
 class NotFoundError extends Error {
   constructor(message) {
     super(message);
@@ -20,7 +13,6 @@ class RequiredKeyError extends Error {
 }
 
 module.exports = {
-  InvalidInputError,
   NotFoundError,
   RequiredKeyError
 };
