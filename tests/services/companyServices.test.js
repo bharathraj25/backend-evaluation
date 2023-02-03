@@ -103,7 +103,7 @@ describe('update company name or ceo of company', () => {
   it('should return list of all companies with scores', async () => {
     const spiedFindAll = jest.spyOn(Company, 'findByPk')
       .mockResolvedValue(companies);
-
+    spiedFindAll;
     // const returedVal = await companyServices.updateCompanyData(sector, 'CEO', 'NAME');
     // expect(spiedFindAll).toBeCalled();
     // expect(returedVal)
