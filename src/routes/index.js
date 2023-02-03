@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
-// const taskRoutes = require('./taskRoutes');
+const { processCsvData } = require('../controllers/processingControl');
 
-// router.use('/tasks', taskRoutes);
+router.post('/save', processCsvData);
 
 module.exports = router;

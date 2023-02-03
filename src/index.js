@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 const apiRoutes = require('./routes');
-app.use('/api', apiRoutes);
+app.use('/', apiRoutes);
 
 app.listen(PORT, () => {
   console.log('server started visit http://localhost:', PORT);
