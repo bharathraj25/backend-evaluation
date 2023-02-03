@@ -33,6 +33,21 @@ describe('get all companies with scores', () => {
     expect(mockRes.status).toBeCalledWith(200);
     expect(mockRes.json).toBeCalledWith(scores);
   });
+
+  it('should return error if something goes wrong on service promise', async () => {
+    const mockReq = {
+      query: {},
+    };
+    const mockRes = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn()
+    };
+    const next = jest.fn();
+
+    jest.spyOn(companyServices, 'getAllScore').mockRejectedValue(new Error('Service error message'));
+    await companyController.getAllScoreController(mockReq, mockRes, next);
+    expect(next).toBeCalledWith(new Error('Service error message'));
+  });
 });
 
 describe('update company name', () => {
@@ -62,6 +77,24 @@ describe('update company name', () => {
     expect(mockRes.status).toBeCalledWith(201);
     expect(mockRes.json).toBeCalledWith(company);
   });
+  it('should return error if something goes wrong on service promise', async () => {
+    const mockReq = {
+      query: {},
+      body: {
+        'id': '95b5a067-808a-44a9-a490-b4ef8a045f61',
+        'name': 'Volkswagen',
+      }
+    };
+    const mockRes = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn()
+    };
+    const next = jest.fn();
+
+    jest.spyOn(companyServices, 'updateCompanyData').mockRejectedValue(new Error('Service error message'));
+    await companyController.getUpdateCompanyController(mockReq, mockRes, next);
+    expect(next).toBeCalledWith(new Error('Service error message'));
+  });
 });
 
 describe('get company by id', () => {
@@ -89,6 +122,22 @@ describe('get company by id', () => {
     await companyController.getCompanyByIdController(mockReq, mockRes, next);
     expect(mockRes.status).toBeCalledWith(200);
     expect(mockRes.json).toBeCalledWith(company);
+  });
+  it('should return error if something goes wrong on service promise', async () => {
+    const mockReq = {
+      query: {
+        id: '95b5a067-808a-44a9-a490-b4ef8a045f61'
+      },
+    };
+    const mockRes = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn()
+    };
+    const next = jest.fn();
+
+    jest.spyOn(companyServices, 'getCompanyById').mockRejectedValue(new Error('Service error message'));
+    await companyController.getCompanyByIdController(mockReq, mockRes, next);
+    expect(next).toBeCalledWith(new Error('Service error message'));
   });
 });
 
@@ -124,5 +173,21 @@ describe('get companies by sector name', () => {
     await companyController.getCompaniesController(mockReq, mockRes, next);
     expect(mockRes.status).toBeCalledWith(200);
     expect(mockRes.json).toBeCalledWith(company);
+  });
+  it('should return error if something goes wrong on service promise', async () => {
+    const mockReq = {
+      query: {
+        sector: 'Software'
+      },
+    };
+    const mockRes = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn()
+    };
+    const next = jest.fn();
+
+    jest.spyOn(companyServices, 'getCompaniesBySector').mockRejectedValue(new Error('Service error message'));
+    await companyController.getCompaniesController(mockReq, mockRes, next);
+    expect(next).toBeCalledWith(new Error('Service error message'));
   });
 });
