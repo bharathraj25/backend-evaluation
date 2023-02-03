@@ -1,5 +1,7 @@
 const db = require('../../db/models');
 
+const { NotFoundError } = require('../error');
+
 const getAllScore = async () => {
   const data = await db.Company.findAll();
   const result = [];
@@ -36,6 +38,7 @@ const getCompaniesBySector = async (sectorName) => {
     });
   });
 
+  if (result.length == 0) throw NotFoundError('No Records Found!');
   result.sort((a, b) => b.score - a.score);
 
   return result.map((company, index) => {
