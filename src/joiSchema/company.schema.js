@@ -1,8 +1,8 @@
 const joi = require('joi');
 
-const urlSchema = {
-  url: joi.string().required()
-}
+const urlSchema = joi.object({
+  urlLink: joi.string().required()
+});
 
 const companySchema = {
   id: joi
@@ -31,6 +31,7 @@ const paramSchema = joi.object({
 });
 
 module.exports = {
+  saveDatabse: urlSchema,
   updateCompany: paramSchema,
   getCompaniesBySector: joi.object({
     sector: companySchema.sector.required()

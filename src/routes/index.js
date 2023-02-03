@@ -6,7 +6,10 @@ const { validationMiddleware } = require('../middleware/validation.middleware');
 const { processCsvData } = require('../controllers/processingControl');
 const { getCompanyByIdController, getAllScoreController, getCompaniesController, getUpdateCompanyController } = require('../controllers/companyController');
 
-router.post('/api/save', processCsvData);
+router.post('/api/save',
+  validationMiddleware(companySchema.saveDatabse),
+  processCsvData
+);
 router.get('/score', getAllScoreController);
 router.get(
   '/api/companies',
