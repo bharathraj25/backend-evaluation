@@ -49,6 +49,7 @@ const getCompaniesBySector = async (sectorName) => {
 const updateCompanyData = async (companyId, ceo = null, companyName = null) => {
   if (!ceo && !companyName) throw new RequiredKeyError('Required either ceo or company name');
   const companyObj = await Company.findByPk(companyId);
+  if (!companyObj) throw new NotFoundError('No Records Found to Update!');
   if (ceo) companyObj['ceo'] = ceo;
   if (companyName) companyObj['name'] = companyName;
   companyObj.save();

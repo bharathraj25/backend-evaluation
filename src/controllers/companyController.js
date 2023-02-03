@@ -24,7 +24,7 @@ const getUpdateCompanyController = async (req, res, next) => {
   try {
     const { id, name, ceo } = req.body;
     const result = await companyServices.updateCompanyData(id.toString(), ceo, name);
-    res.status(201).json(result);
+    res.status(200).json(result);
   } catch (err) {
     next(err);
   }

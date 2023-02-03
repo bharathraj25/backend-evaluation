@@ -15,7 +15,7 @@ router.get(
   '/api/companies',
   validationMiddleware(companySchema.getCompaniesBySector, 'query'),
   getCompaniesController);
-router.post('/api/company',
+router.patch('/api/company',
   validationMiddleware(companySchema.updateCompany),
   getUpdateCompanyController
 );
