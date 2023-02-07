@@ -1,6 +1,8 @@
 const db = require('../../db/models');
 const axios = require('axios');
 
+const { DOMAIN } = require('../config');
+
 const externalApiCall = async (url) => {
   return (await axios.get(
     url,
@@ -20,11 +22,11 @@ const fetchExtrenalApiData = async (csvData) => {
     let urlCompany, urlSector;
     if (!sectors.includes(company_sector)) {
       sectors.push(company_sector);
-      urlSector = 'http://54.167.46.10/sector?name=' + company_sector.toString();
+      urlSector = DOMAIN + 'sector?name=' + company_sector.toString();
       sectorApiPromise.push(externalApiCall(urlSector));
     }
     if (!companies.includes(company_id)) {
-      urlCompany = 'http://54.167.46.10/company/' + company_id.toString();
+      urlCompany = DOMAIN + 'company/' + company_id.toString();
       companies.push(company_id);
       companyApiPromise.push(externalApiCall(urlCompany));
     }
